@@ -1,0 +1,37 @@
+resources:
+  - name: githab_repo
+    type: GitRepo
+    configuration:
+      gitProvider: skoriy88_github
+      path: skoriy88/simple-springboot-app
+      buildOn:
+        commit: true
+      branches:
+        include: master
+  
+  - name: mvn_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+
+pipelines:
+  - name: springboot
+    steps:
+      - name: mvn_build_step
+        type: MvnBuild
+        configuration:
+          deployerSnapshotRepo: mymavenrepo
+          deployerReleaseRepo: mymavenrepo
+          inputResources:
+            - name: githab_repo
+          integrations:
+            - name: art
+            
+      - name: publish_build
+        type: PublishBuildInfo
+        configuration:
+          forceXrayScan: false
+          inputSteps:
+            - name: mvn_build_step
+          outputResources:
+            - name: mvn_build_info
