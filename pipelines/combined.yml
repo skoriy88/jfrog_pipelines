@@ -46,8 +46,9 @@ pipelines:
         execution:
           onStart:
             - pwd
-            - ls
-            - ls ../
+            - ls dependencyState/resources/builded_file/
+            - echo $res_docker_repo_resourcePath
+            - ls $res_docker_repo_resourcePath
 
       - name: docker_push
         type: DockerPush
