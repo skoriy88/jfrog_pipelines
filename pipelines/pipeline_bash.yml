@@ -11,8 +11,8 @@ pipelines:
           onExecute:
             - pwd
             - ls
-            - echo $res__myFirstRepo_resourcePath
-            - ls $res__myFirstRepo_resourcePath
+            - echo $res_myFirstRepo_resourcePath
+            - ls $res_myFirstRepo_resourcePath
             # Data from input resources is available as env variables in the step
             - echo $res_myFirstRepo_commitSha
             # The next two commands add variables to run state, which is available to all downstream steps in this run
