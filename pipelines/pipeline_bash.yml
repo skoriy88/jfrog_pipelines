@@ -29,25 +29,25 @@ pipelines:
             - git checkout master
             - mvn clean install -DskipTests
 
-      # - name: p1_s2
-      #   type: Bash
-      #   configuration:
-      #     inputSteps:
-      #       - name: p1_s1
-      #   execution:
-      #     onExecute:
-      #       # Demonstrates the availability of an env variable written to run state during p1_s1
-      #       - echo $current_runid
-        
       - name: p1_s2
-        type: PublishBuildInfo
+        type: Bash
         configuration:
-          forceXrayScan: false
-          failOnScan: false
           inputSteps:
             - name: p1_s1
-          outputResources:
-            - name: mvn_build_info
+        execution:
+          onExecute:
+            # Demonstrates the availability of an env variable written to run state during p1_s1
+            - echo $current_runid
+        
+      # - name: p1_s2
+      #   type: PublishBuildInfo
+      #   configuration:
+      #     forceXrayScan: false
+      #     failOnScan: false
+      #     inputSteps:
+      #       - name: p1_s1
+      #     outputResources:
+      #       - name: mvn_build_info
 
       - name: p1_s3
         type: Bash
