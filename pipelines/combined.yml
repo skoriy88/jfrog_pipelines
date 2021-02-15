@@ -60,3 +60,22 @@ pipelines:
             - name: docker_image
             - name: docker_build_info
           autoPublishBuildInfo: true
+
+      - name: ssh_to_ec2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: docker_build
+          inputResources:
+            - name: builded_file
+            - name: docker_image
+          integrations:
+            - name: virginia_ec2_key
+            - name: art
+        execution:
+          onExecute:
+            - pwd
+            - ls -R
+            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 . ubuntu@54.163.31.42:/home/ubuntu/tst
+          onComplete:
+            - echo "SUCCESS" 

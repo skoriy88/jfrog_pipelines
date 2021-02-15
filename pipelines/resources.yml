@@ -46,7 +46,15 @@ resources:
       sourceArtifactory: art
       pattern: mymavenrepo/*/combined-*${run_id}.war
       flat: true
-      # target: myapp/
+      target: app.war
+
+  - name: docker_image
+    type: FileSpec
+    configuration:     
+      sourceArtifactory: art
+      pattern: mydockerrepo/skoriy88/test_docker:latest
+      flat: true
+      target: container
 
   - name: myFirstRepo
     type: GitRepo
