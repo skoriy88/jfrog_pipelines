@@ -79,6 +79,6 @@ pipelines:
           onExecute:
             - pwd
             - ls -R
-            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 . ubuntu@54.163.31.42:/home/ubuntu/tst
+            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 ./dependencyState/resources/builded_file/app.war ubuntu@54.163.31.42:/home/ubuntu/tst
           onSuccess:
             - echo "SUCCESS" 
