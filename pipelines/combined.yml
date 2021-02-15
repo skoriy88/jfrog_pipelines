@@ -43,6 +43,11 @@ pipelines:
             - name: builded_file 
           integrations:
             - name: art                            # <-- replace with your artifactory integration
+        execution:
+          onStart:
+            - pwd
+            - ls
+            - ls ../
 
       - name: docker_push
         type: DockerPush
