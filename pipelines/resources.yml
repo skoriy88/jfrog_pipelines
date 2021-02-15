@@ -46,7 +46,7 @@ resources:
       sourceArtifactory: art
       pattern: mymavenrepo/*/combined-*${run_id}.war
       flat: true
-      target: myapp/
+      # target: myapp/
 
   - name: myFirstRepo
     type: GitRepo
