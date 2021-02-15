@@ -25,16 +25,29 @@ pipelines:
             # So this will be empty during first run and will be set to prior run number in subsequent runs
             # Pipeline state documentation: https://www.jfrog.com/confluence/display/JFROG/Creating+Stateful+Pipelines#CreatingStatefulPipelines-PipelineState
             - echo "Previous run ID is $prev_runid"
+            - cd $res_myFirstRepo_resourcePath
+            - git checkout master
+            - mvn clean install -DskipTests
 
+      # - name: p1_s2
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: p1_s1
+      #   execution:
+      #     onExecute:
+      #       # Demonstrates the availability of an env variable written to run state during p1_s1
+      #       - echo $current_runid
+        
       - name: p1_s2
-        type: Bash
+        type: PublishBuildInfo
         configuration:
+          forceXrayScan: false
+          failOnScan: false
           inputSteps:
             - name: p1_s1
-        execution:
-          onExecute:
-            # Demonstrates the availability of an env variable written to run state during p1_s1
-            - echo $current_runid
+          outputResources:
+            - name: mvn_build_info
 
       - name: p1_s3
         type: Bash
@@ -43,6 +56,13 @@ pipelines:
             - name: p1_s2
           outputResources:
             - name: myPropertyBag
+          runtime:
+            type: image
+            image:
+              auto:
+                language: java
+                versions:
+                  - '8'
         execution:
           onExecute:
             - echo $current_runid
