@@ -80,5 +80,5 @@ pipelines:
             - pwd
             - ls -R
             - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 . ubuntu@54.163.31.42:/home/ubuntu/tst
-          onComplete:
+          onSuccess:
             - echo "SUCCESS" 
