@@ -15,7 +15,7 @@ resources:
       sourceArtifactory: art
 
 pipelines:
-  - name: springboot
+  - name: springboot1
     steps:
       - name: mvn_build_step
         type: MvnBuild
