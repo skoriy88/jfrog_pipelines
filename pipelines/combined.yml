@@ -48,7 +48,6 @@ pipelines:
             - pwd
             - ls -R dependencyState/resources/builded_file/
             - ls -R dependencyState/resources/builded_file/myapp/
-            - ls -R dependencyState/resources/builded_file/skoriy88
             - echo $res_docker_repo_resourcePath
             - ls $res_docker_repo_resourcePath
 
