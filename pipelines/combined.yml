@@ -32,7 +32,7 @@ pipelines:
         type: DockerBuild
         configuration:
           inputSteps:
-            - name: mvn_build_step
+            - name: publish_build
           affinityGroup: docker_group
           dockerFileLocation: ./docker
           dockerFileName: DockerFile_combined
