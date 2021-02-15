@@ -27,6 +27,9 @@ pipelines:
             - name: githab_repo
           integrations:
             - name: art
+        execution:
+          onStart: 
+            - pwd
             
       - name: publish_build
         type: PublishBuildInfo
