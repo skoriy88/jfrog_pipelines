@@ -1,3 +1,4 @@
+apiVersion: v1.1
 pipelines:
   - name: springboot1
     steps:

@@ -1,3 +1,4 @@
+apiVersion: v1.1
 pipelines:
   - name: my_first_pipeline
     steps:
