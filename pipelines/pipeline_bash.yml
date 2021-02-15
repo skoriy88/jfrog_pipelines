@@ -13,6 +13,7 @@ pipelines:
             - ls
             - echo $res_myFirstRepo_resourcePath
             - ls $res_myFirstRepo_resourcePath
+            - cat $res_myFirstRepo_resourcePath/pom.xml
             # Data from input resources is available as env variables in the step
             - echo $res_myFirstRepo_commitSha
             # The next two commands add variables to run state, which is available to all downstream steps in this run

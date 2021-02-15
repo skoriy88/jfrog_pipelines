@@ -4,7 +4,7 @@ pipelines:
       - name: mvn_build_step
         type: MvnBuild
         configuration:
-          mvnCommand: clean install
+          mvnCommand: clean install -f $res_myFirstRepo_resourcePath/pom.xml
           deployerSnapshotRepo: mymavenrepo
           deployerReleaseRepo: mymavenrepo
           inputResources:
