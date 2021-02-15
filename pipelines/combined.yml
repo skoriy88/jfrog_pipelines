@@ -31,6 +31,8 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
+          inputSteps:
+            - name: mvn_build_step
           affinityGroup: docker_group
           dockerFileLocation: ./docker
           dockerFileName: DockerFile_combined
