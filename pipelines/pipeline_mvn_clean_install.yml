@@ -30,6 +30,8 @@ pipelines:
         execution:
           onStart: 
             - pwd
+            - ls
+            - echo $res_githab_repo_resourcePath
             
       - name: publish_build
         type: PublishBuildInfo
