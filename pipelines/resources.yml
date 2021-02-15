@@ -48,7 +48,7 @@ resources:
       flat: true
       target: app.war
 
-  - name: docker_image
+  - name: docker_image_file
     type: FileSpec
     configuration:     
       sourceArtifactory: art
