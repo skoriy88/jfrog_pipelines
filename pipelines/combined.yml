@@ -1,0 +1,57 @@
+apiVersion: v1.1
+pipelines:
+  - name: combined
+    steps:
+      - name: mvn_build_step
+        type: MvnBuild
+        configuration:
+          mvnCommand: clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
+          deployerSnapshotRepo: mymavenrepo
+          deployerReleaseRepo: mymavenrepo
+          inputResources:
+            - name: githab_repo
+          integrations:
+            - name: art
+        execution:
+          onStart: 
+            - pwd
+            - ls
+            - echo $res_githab_repo_resourcePath
+            - ls $res_githab_repo_resourcePath
+            
+      - name: publish_build
+        type: PublishBuildInfo
+        configuration:
+          forceXrayScan: false
+          inputSteps:
+            - name: mvn_build_step
+          outputResources:
+            - name: mvn_build_info
+
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          affinityGroup: docker_group
+          dockerFileLocation: ./docker
+          dockerFileName: DockerFile_combined
+          dockerImageName: skoriy88.jfrog.io/mydockerrepo/skoriy88/test_docker  # replace with your image path and name
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: docker_repo
+            - name: builded_file 
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: mydockerrepo
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+          inputSteps:
+            - name: docker_build
+          outputResources:
+            - name: docker_image
+            - name: docker_build_info
+          autoPublishBuildInfo: true

@@ -14,6 +14,8 @@ resources:
     configuration:
       gitProvider: skoriy88_github
       path: skoriy88/jfrog_pipelines
+      buildOn:
+        commit: false
       branches:
         include: master
   
@@ -30,11 +32,20 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: art
+      # buildNumber: ${run_number}
 
   - name: mvn_build_info
     type: BuildInfo
     configuration:
       sourceArtifactory: art
+      buildNumber: ${run_number}
+
+  - name: builded_file
+    type: FileSpec
+    configuration:     
+      sourceArtifactory:    art
+      pattern: mymavenrepo/*/springboot-*.war
+      target: /myapp/app.war
 
   - name: myFirstRepo
     type: GitRepo
