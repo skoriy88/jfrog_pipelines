@@ -7,7 +7,7 @@ resources:
       buildOn:
         commit: true
       branches:
-        include: master
+        include: main
   
   - name: mvn_build_info
     type: BuildInfo
