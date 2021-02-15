@@ -68,7 +68,7 @@ pipelines:
             - name: docker_build
           inputResources:
             - name: builded_file
-            - name: docker_image_file
+            # - name: docker_image_file
           integrations:
             - name: virginia_ec2_key
             - name: art
