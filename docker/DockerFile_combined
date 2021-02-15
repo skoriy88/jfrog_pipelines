@@ -1,6 +1,5 @@
 
 FROM openjdk:8-jdk-alpine
-# WORKDIR /myapp
 ARG WAR_FILE=*.war
 COPY ${WAR_FILE} app.war
 ENTRYPOINT ["nohup", "java", "-jar", "/app.war", "--server.port=9999"]
