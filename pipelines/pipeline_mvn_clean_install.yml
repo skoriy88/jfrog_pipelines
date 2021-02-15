@@ -5,7 +5,7 @@ pipelines:
       - name: mvn_build_step
         type: MvnBuild
         configuration:
-          mvnCommand: clean install -DskipTests -f $res_myFirstRepo_resourcePath/pom.xml
+          mvnCommand: clean install -DskipTests
           deployerSnapshotRepo: mymavenrepo
           deployerReleaseRepo: mymavenrepo
           inputResources:
