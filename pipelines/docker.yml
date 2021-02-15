@@ -25,5 +25,5 @@ pipelines:
             - name: docker_build
           outputResources:
             - name: docker_image
-            # - name: docker_build_info
-          # autoPublishBuildInfo: true
+            - name: docker_build_info
+          autoPublishBuildInfo: true
