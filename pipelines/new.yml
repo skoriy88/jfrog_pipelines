@@ -1,0 +1,23 @@
+apiVersion: v1.1
+pipelines:
+  - name: new_s1
+    steps:
+      - name: mvn_build_step
+        type: MvnBuild
+        configuration:
+          mvnCommand: clean install -DskipTests
+          deployerSnapshotRepo: mymavenrepo
+          deployerReleaseRepo: mymavenrepo
+          autoPublishBuildInfo: true
+          inputResources:
+            - name: githab_repo
+          outputResources:
+            - name: mvn_build_info
+          integrations:
+            - name: art
+        execution:
+          onStart: 
+            - pwd
+            - ls
+            - echo $res_githab_repo_resourcePath
+            - ls $res_githab_repo_resourcePath
