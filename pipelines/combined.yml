@@ -45,11 +45,7 @@ pipelines:
             - name: art                            # <-- replace with your artifactory integration
         execution:
           onStart:
-            - pwd
-            - ls -R dependencyState/resources/builded_file/
-            - ls -R dependencyState/resources/builded_file/myapp/
-            - echo $res_docker_repo_resourcePath
-            - ls $res_docker_repo_resourcePath
+            - echo "Creating docker container"
 
       - name: docker_push
         type: DockerPush
