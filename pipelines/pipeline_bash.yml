@@ -25,9 +25,9 @@ pipelines:
             # So this will be empty during first run and will be set to prior run number in subsequent runs
             # Pipeline state documentation: https://www.jfrog.com/confluence/display/JFROG/Creating+Stateful+Pipelines#CreatingStatefulPipelines-PipelineState
             - echo "Previous run ID is $prev_runid"
-            - cd $res_myFirstRepo_resourcePath
-            - git checkout master
-            - clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
+            # - cd $res_myFirstRepo_resourcePath
+            # - git checkout master
+            # - clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
 
       - name: p1_s2
         type: Bash
