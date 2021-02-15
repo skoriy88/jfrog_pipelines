@@ -1,0 +1,29 @@
+pipelines:
+  - name: docker_create
+    steps:
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          affinityGroup: docker_group
+          dockerFileLocation: ./docker
+          dockerFileName: DockerFile
+          dockerImageName: mydockerrepo/skoriy88/test_docker  # replace with your image path and name
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: docker_repo
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: mydockerrepo
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+          inputSteps:
+            - name: docker_build
+          outputResources:
+            - name: docker_image
+            - name: docker_build_info
+          autoPublishBuildInfo: true
