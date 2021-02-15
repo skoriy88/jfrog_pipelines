@@ -1,10 +1,11 @@
 apiVersion: v1.1
 pipelines:
-  - name: springboot1
+  - name: pipeline1
     steps:
       - name: mvn_build_step
         type: MvnBuild
         configuration:
+          mvnCommand: clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
           deployerSnapshotRepo: mymavenrepo
           deployerReleaseRepo: mymavenrepo
           inputResources:

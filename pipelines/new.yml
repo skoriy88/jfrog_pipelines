@@ -5,7 +5,7 @@ pipelines:
       - name: mvn_build_step
         type: MvnBuild
         configuration:
-          mvnCommand: clean install -DskipTests
+          mvnCommand: clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
           deployerSnapshotRepo: mymavenrepo
           deployerReleaseRepo: mymavenrepo
           autoPublishBuildInfo: true

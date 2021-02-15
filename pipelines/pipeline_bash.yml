@@ -27,7 +27,7 @@ pipelines:
             - echo "Previous run ID is $prev_runid"
             - cd $res_myFirstRepo_resourcePath
             - git checkout master
-            - mvn clean install -DskipTests
+            - clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
 
       - name: p1_s2
         type: Bash
