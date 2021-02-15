@@ -43,8 +43,9 @@ resources:
   - name: builded_file
     type: FileSpec
     configuration:     
-      sourceArtifactory:    art
+      sourceArtifactory: art
       pattern: mymavenrepo/*/combined-*${run_id}.war
+      flat: true
       target: myapp/
 
   - name: myFirstRepo
