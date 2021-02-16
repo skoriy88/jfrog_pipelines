@@ -10,6 +10,7 @@ pipelines:
             - name: docker_repo
           integrations:
             - name: docker_repo_int
+            - name: virginia_ec2_key
         execution:
           onExecute:
             - ansible --version
