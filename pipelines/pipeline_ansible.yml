@@ -18,4 +18,4 @@ pipelines:
             - printenv int_docker_repo_int_url
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
-            # - ansible-playbook ./ansible/playbook.yml -i test -vvv
+            - ansible-playbook .dependencyState/resources/docker_repo/ansible/playbook.yml -i test -vvv
