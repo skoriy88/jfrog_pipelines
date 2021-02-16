@@ -1,7 +1,7 @@
   
 ---
 - name: build docker container
-  hosts: docker
+  hosts: test
   become: yes
   vars_files: [./vars.yml]
 
