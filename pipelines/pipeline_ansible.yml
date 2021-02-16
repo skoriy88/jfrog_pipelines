@@ -14,7 +14,7 @@ pipelines:
           onExecute:
             - ansible --version
             - pwd
-            - ls
+            - ls -R dependencyState/resources/docker_repo/
             - printenv int_docker_repo_int_url
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
