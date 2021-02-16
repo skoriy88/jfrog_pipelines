@@ -2,4 +2,4 @@
 registry_address: "{{ lookup('env', 'int_docker_repo_int_url') }}"
 registry_username: "{{ lookup('env', 'int_docker_repo_int_username') }}"
 registry_password: "{{ lookup('env', 'int_docker_repo_int_password') }}"
-registry_name: mydockerrepo/skoriy88
+registry_name: skoriy88.jfrog.io/artifactory/mydockerrepo/skoriy88
