@@ -10,7 +10,7 @@
   #     shell:
   #       "docker login -u {{ registry_username }} -p {{ registry_password }} {{ registry_address }}"
     - name: Log into private registry and force re-authorization
-      community.general.docker_login:
+      docker_login:
         registry_url: "{{ registry_address }}"
         username: "{{ registry_username }}"
         password: "{{ registry_password }}"
@@ -29,7 +29,7 @@
     #     docker rm $(docker ps -a -q)
 
     - name: Running the container
-      community.general.docker_container:
+      docker_container:
         image: "{{ registry_address }}/{{ image_name }}:latest"
         name: app_container
         state: started
