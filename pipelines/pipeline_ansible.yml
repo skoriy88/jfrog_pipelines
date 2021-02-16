@@ -14,6 +14,7 @@ pipelines:
           onExecute:
             - ansible --version
             - ansible-galaxy collection install community.general
+            - sudo ansible-galaxy collection install community.general
             - pwd
             - ls -R dependencyState/resources/docker_repo/
             - printenv int_docker_repo_int_url
