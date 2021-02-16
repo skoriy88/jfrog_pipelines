@@ -57,7 +57,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources:
-            - name: my_docker_image
+            - name: my_docker_image2
             - name: docker_build_info
           autoPublishBuildInfo: true
 

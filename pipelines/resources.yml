@@ -33,6 +33,15 @@ resources:
     configuration:
       registry: art                                # <-- replace with your artifactory integration
       sourceRepository: mydockerrepo               # <-- required if registry is Artifactory
+      imageName: mydockerrepo/skoriy88/test_docker # < -- replace with your image path and name
+      imageTag: latest
+      autoPull: true
+
+  - name: my_docker_image2
+    type: Image
+    configuration:
+      registry: art                                # <-- replace with your artifactory integration
+      sourceRepository: mydockerrepo               # <-- required if registry is Artifactory
       imageName: mydockerrepo/container1 # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
