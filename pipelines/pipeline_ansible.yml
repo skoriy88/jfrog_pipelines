@@ -1,0 +1,21 @@
+apiVersion: v1.1
+pipelines:
+  - name: ansible
+    steps:
+      - name: p1_s1
+        type: Bash
+        configuration:
+          inputResources:
+            # Sets up step to be triggered when there are commit events to myFirstRepo
+            - name: docker_repo
+          integrations:
+            - name: docker_repo_int
+        execution:
+          onExecute:
+            - ansible --version
+            - pwd
+            - ls
+            - printenv int_docker_repo_int_url
+            - printenv int_docker_repo_int_username
+            - printenv int_docker_repo_int_password
+            # - ansible-playbook ./ansible/playbook.yml -i test -vvv
