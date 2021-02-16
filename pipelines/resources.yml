@@ -5,6 +5,16 @@ resources:
       gitProvider: skoriy88_github
       path: skoriy88/simple-springboot-app
       buildOn:
+        commit: falce
+      branches:
+        include: master
+
+  - name: simple_spring_boot_repo
+    type: GitRepo
+    configuration:
+      gitProvider: skoriy88_github
+      path: skoriy88/simple-springboot-app
+      buildOn:
         commit: true
       branches:
         include: master
@@ -65,6 +75,23 @@ resources:
       pattern: mymavenrepo/*/combined-*${run_id}.war
       flat: true
       target: app.war
+
+  - name: builded_file_full
+    type: FileSpec
+    configuration:     
+      sourceArtifactory: art
+      pattern: mymavenrepo/*/combined-*${run_id}.war
+      flat: true
+      target: fullcicd.war
+
+  - name: docker_image_full
+    type: Image
+    configuration:
+      registry: art                                # <-- replace with your artifactory integration
+      sourceRepository: mydockerrepo               # <-- required if registry is Artifactory
+      imageName: mydockerrepo/fullcicd # < -- replace with your image path and name
+      imageTag: latest
+      autoPull: true
 
   - name: docker_image_file
     type: FileSpec

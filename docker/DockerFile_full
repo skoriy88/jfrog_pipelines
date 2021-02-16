@@ -1,0 +1,5 @@
+
+FROM openjdk:8-jdk-alpine
+ARG WAR_FILE=fullcicd.war
+COPY ${WAR_FILE} deployed_app.war
+ENTRYPOINT ["nohup", "java", "-jar", "/deployed_app.war", "--server.port=9999"]

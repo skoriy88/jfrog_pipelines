@@ -1,0 +1,81 @@
+apiVersion: v1.1
+pipelines:
+  - name: full_ci_cd
+    steps:
+      - name: mvn_build_step
+        type: MvnBuild
+        configuration:
+          mvnCommand: clean install -DskipTests -Dver=1.0.$run_id -Did=$pipeline_name
+          deployerSnapshotRepo: mymavenrepo
+          deployerReleaseRepo: mymavenrepo
+          inputResources:
+            - name: simple_spring_boot_repo
+          integrations:
+            - name: art
+        execution:
+          onStart: 
+            - echo $res_simple_spring_boot_repo_resourcePath
+            
+      - name: publish_build
+        type: PublishBuildInfo
+        configuration:
+          forceXrayScan: false
+          inputSteps:
+            - name: mvn_build_step
+          outputResources:
+            - name: mvn_build_info
+
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          inputSteps:
+            - name: publish_build
+          affinityGroup: docker_group
+          dockerFileLocation: ./docker
+          dockerFileName: DockerFile_full
+          dockerImageName: skoriy88.jfrog.io/mydockerrepo/fullcicd # replace with your image path and name
+          dockerImageTag: latest
+          inputResources:
+            - name: docker_repo
+            - name: builded_file 
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+        execution:
+          onStart:
+            - echo "Creating docker container"
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: mydockerrepo
+          integrations:
+            - name: art                            # <-- replace with your artifactory integration
+          inputSteps:
+            - name: docker_build
+          outputResources:
+            - name: docker_image_full
+            - name: docker_build_info
+          autoPublishBuildInfo: true
+
+      - name: ssh_to_ec2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: docker_build
+          inputResources:
+            - name: builded_file
+            # - name: docker_image_file
+          integrations:
+            - name: virginia_ec2_key
+            - name: art
+        execution:
+          onStart:
+            - pwd
+            - ls -R
+          onExecute:
+            - pwd
+            - ls -R
+            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 ./dependencyState/resources/builded_file/app.war ubuntu@54.163.31.42:/home/ubuntu/tstarr${run_id}.war
+          onSuccess:
+            - echo "SUCCESS" 
