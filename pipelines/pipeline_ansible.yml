@@ -18,6 +18,7 @@ pipelines:
             - sudo ansible-galaxy collection install community.general
             - pwd
             - ls -R dependencyState/resources/docker_repo/
+            - ls -R $res_docker_repo_resourcePath
             - printenv int_docker_repo_int_url
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
