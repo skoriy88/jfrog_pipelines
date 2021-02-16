@@ -38,7 +38,7 @@
 
     - name: Running the container
       docker_container:
-        image: "{{ registry_name }}/test_docker:latest"
+        image: "{{ registry_name }}/container1:latest"
         name: app_container
         state: started
         ports:
