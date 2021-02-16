@@ -37,7 +37,7 @@ pipelines:
           dockerFileLocation: ./docker
           dockerFileName: DockerFile_combined
           dockerImageName: skoriy88.jfrog.io/mydockerrepo/container1  # replace with your image path and name
-          dockerImageTag: ${run_id}
+          dockerImageTag: latest
           inputResources:
             - name: docker_repo
             - name: builded_file 

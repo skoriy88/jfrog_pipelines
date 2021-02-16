@@ -25,4 +25,5 @@ pipelines:
             - cd dependencyState/resources/docker_repo/
             - pwd
             - cd $res_docker_repo_resourcePath
+            - pwd
             - ansible-playbook ./ansible/playbook.yml -i ./ansible/hosts -vvv
