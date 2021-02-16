@@ -23,4 +23,6 @@ pipelines:
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
             - cd dependencyState/resources/docker_repo/
+            - pwd
+            - cd $res_docker_repo_resourcePath
             - ansible-playbook ./ansible/playbook.yml -i ./ansible/hosts -vvv
