@@ -36,7 +36,7 @@ pipelines:
           affinityGroup: docker_group
           dockerFileLocation: ./docker
           dockerFileName: DockerFile_combined
-          dockerImageName: skoriy88.jfrog.io/mydockerrepo/skoriy88/mydocker  # replace with your image path and name
+          dockerImageName: mydockerrepo/container1  # replace with your image path and name
           dockerImageTag: ${run_id}
           inputResources:
             - name: docker_repo
