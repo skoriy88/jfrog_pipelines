@@ -5,7 +5,7 @@ resources:
       gitProvider: skoriy88_github
       path: skoriy88/simple-springboot-app
       buildOn:
-        commit: falce
+        commit: false
       branches:
         include: master
 
