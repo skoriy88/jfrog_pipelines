@@ -6,6 +6,14 @@
   vars_files: [./vars.yml]
 
   tasks:
+    - name: Install pip
+      apt: 
+        name: [python-pip, python3-pip ]
+        state: present
+    - name: install docker-py
+      pip: 
+        name: docker-py
+
   #   - name: Log into private registry
   #     shell:
   #       "docker login -u {{ registry_username }} -p {{ registry_password }} {{ registry_address }}"
