@@ -102,4 +102,4 @@ pipelines:
             - printenv int_docker_repo_int_url
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
-            - ansible-playbook ./ansible/playbook_full.yml -i $res_docker_repo_resourcePath/ansible/hosts -vvv
+            - ansible-playbook $res_docker_repo_resourcePath/ansible/playbook_full.yml -i $res_docker_repo_resourcePath/ansible/hosts -vvv
