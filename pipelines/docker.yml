@@ -8,7 +8,7 @@ pipelines:
           dockerFileLocation: ./docker
           dockerFileName: DockerFile
           dockerImageName: skoriy88.jfrog.io/mydockerrepo/skoriy88/test_docker  # replace with your image path and name
-          dockerImageTag: latest
+          dockerImageTag: ${run_id}
           inputResources:
             - name: docker_repo
           integrations:
@@ -25,7 +25,7 @@ pipelines:
             - name: docker_build
           outputResources:
             - name: docker_image
-            - name: dbp_build_info
+            # - name: dbp_build_info
           # autoPublishBuildInfo: true
 
       - name: publish_dbp_build
