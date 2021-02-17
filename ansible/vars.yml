@@ -13,4 +13,4 @@ group_id:            skoriy88
 artifact_id:         "{{ lookup('env', 'pipeline_name') }}"
 artifact_version:    "1.0.{{ lookup('env', 'run_id') }}"
 artifact_extension:  "war"
-artifact_dest:       /home/ubuntu/tst/ans_app.war
+artifact_dest:       "/home/ubuntu/tst/ans_app.war{{ artifact_version }}"
