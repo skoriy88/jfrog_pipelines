@@ -31,10 +31,10 @@
     #     tag: latest
     #     source: pull
         
-    # - name: Stop and del all containers
-    #   shell: |
-    #     docker stop $(docker ps -a -q)
-    #     docker rm $(docker ps -a -q)
+    - name: Stop and del all containers
+      shell: |
+        docker stop $(docker ps -a -q)
+        docker rm $(docker ps -a -q)
 
     - name: Running the container
       docker_container:

@@ -86,17 +86,17 @@ pipelines:
             - name: docker_push
           inputResources:
             - name: docker_repo
-            - name: builded_file_full
+            # - name: builded_file_full
           integrations:
             - name: docker_repo_int
             - name: virginia_ec2_key
-            - name: maven_repo_int
+            # - name: maven_repo_int
             - name: cred_int
         execution:
           onExecute:
             - ansible --version
             - pwd
-            - ls -R $res_builded_file_full_resourcePath
+            # - ls -R $res_builded_file_full_resourcePath
             - ls -R $res_docker_repo_resourcePath
             - printenv int_docker_repo_int_url
             - printenv int_cred_int_maven_repo_url
