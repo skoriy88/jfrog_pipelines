@@ -1,4 +1,3 @@
-
 FROM openjdk:8-jdk-alpine
 ARG WAR_FILE=fullcicd.war
 COPY ${WAR_FILE} deployed_app.war

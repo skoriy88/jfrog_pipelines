@@ -1,0 +1,65 @@
+  
+---
+- name: build docker container
+  hosts: test
+  become: yes
+  vars_files: [./vars.yml]
+
+  tasks:
+    - name: Install pip
+      apt: 
+        name: [python-pip, python3-pip ]
+        state: present
+    - name: install docker-py
+      pip: 
+        name: docker-py
+
+  #   - name: Log into private registry
+  #     shell:
+  #       "docker login -u {{ registry_username }} -p {{ registry_password }} {{ registry_address }}"
+    - name: Log into private registry and force re-authorization
+      docker_login:
+        registry_url: "{{ registry_address }}"
+        username: "{{ registry_username }}"
+        password: "{{ registry_password }}"
+        reauthorize: yes
+    
+
+    # - name: Pull image from a private repo
+    #   community.general.docker_image:
+    #     name: "{{ registry_address }}/{{ image_name }}"
+    #     tag: latest
+    #     source: pull
+        
+    # - name: Stop and del all containers
+    #   shell: |
+    #     docker stop $(docker ps -a -q)
+    #     docker rm $(docker ps -a -q)
+
+    - name: Running the container
+      docker_container:
+        image: "{{ registry_name }}/{{ image_name }}:latest"
+        name: app_container
+        state: started
+        ports:
+        - "9999:9999"
+
+    - name:                 Download artifact from Nexus
+      maven_artifact:
+        repository_url:     "{{ repository_url }}"
+        username:           "{{ repository_user }}"
+        password:           "{{ repository_password }}"
+        group_id:           "{{ pom_group_id }}" #"{{ group_id }}"
+        artifact_id:        "{{ pom_artifact_id }}" #"{{ artifact_id }}"
+        version:             "{{ artifact_version }}" #"{{ pom_artifact_version }}"
+        extension:           "{{ artifact_extension }}" #"{{ pom_artifact_extension }}"
+        dest:               "{{ artifact_dest }}"
+
+    - name:                 Kill process on port 8888
+      ignore_errors: yes
+      shell:
+        kill -9 $(lsof -t -i:8888)    
+
+    - name:                 Run downloaded artifact on CI environment
+      shell:
+        nohup java -jar "{{ artifact_dest }}" --server.port=8888 &

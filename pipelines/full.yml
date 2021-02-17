@@ -78,3 +78,29 @@ pipelines:
             - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 $res_builded_file_full_resourcePath/fullcicd.war ubuntu@54.163.31.42:/home/ubuntu/tst/app${run_id}.war
           onSuccess:
             - echo "SUCCESS" 
+
+      - name: ansible_step
+        type: Bash
+        configuration:
+          inputResources:
+            - name: docker_repo
+            - name: builded_file_full
+          integrations:
+            - name: docker_repo_int
+            - name: virginia_ec2_key
+            - name: maven_repo_int
+        execution:
+          onExecute:
+            - ansible --version
+            - ansible-galaxy collection install community.general
+            - sudo ansible-galaxy collection install community.general
+            - pwd
+            - ls -R $res_builded_file_full_resourcePath
+            - ls -R $res_docker_repo_resourcePath
+            - printenv int_docker_repo_int_url
+            - printenv int_docker_repo_int_username
+            - printenv int_docker_repo_int_password
+            - printenv int_maven_repo_int_url
+            - printenv int_maven_repo_int_username
+            - printenv int_maven_repo_int_password
+            # - ansible-playbook ./ansible/playbook_full.yml -i $res_docker_repo_resourcePath/ansible/hosts -vvv
