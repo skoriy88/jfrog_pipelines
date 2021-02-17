@@ -80,7 +80,7 @@ resources:
     type: FileSpec
     configuration:     
       sourceArtifactory: art
-      pattern: mymavenrepo/*/combined-*${run_id}.war
+      pattern: mymavenrepo/*/full_ci_cd-*${run_id}.war
       flat: true
       target: fullcicd.war
 
