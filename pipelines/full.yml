@@ -91,6 +91,7 @@ pipelines:
             - name: docker_repo_int
             - name: virginia_ec2_key
             - name: maven_repo_int
+            - name: cred_int
         execution:
           onExecute:
             - ansible --version
@@ -102,4 +103,6 @@ pipelines:
             - printenv int_docker_repo_int_url
             - printenv int_docker_repo_int_username
             - printenv int_docker_repo_int_password
+            - printenv int_cred_int_maven_repo_username
+            - printenv int_cred_int_maven_repo_password
             - ansible-playbook $res_docker_repo_resourcePath/ansible/playbook_full.yml -i $res_docker_repo_resourcePath/ansible/hosts -vvv
