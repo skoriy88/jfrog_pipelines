@@ -12,7 +12,7 @@
         state: present
     - name: install docker-py
       pip: 
-        name: docker-py
+        name: docker-py, lxml
 
   #   - name: Log into private registry
   #     shell:
