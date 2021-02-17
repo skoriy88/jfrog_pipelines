@@ -37,7 +37,7 @@ pipelines:
           dockerImageTag: latest
           inputResources:
             - name: docker_repo
-            - name: builded_file 
+            - name: builded_file_full 
           integrations:
             - name: art                            # <-- replace with your artifactory integration
         execution:
@@ -64,8 +64,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           inputResources:
-            - name: builded_file
-            # - name: docker_image_file
+            - name: builded_file_full
           integrations:
             - name: virginia_ec2_key
             - name: art
@@ -76,6 +75,6 @@ pipelines:
           onExecute:
             - pwd
             - ls -R
-            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 ./dependencyState/resources/builded_file/app.war ubuntu@54.163.31.42:/home/ubuntu/tstarr${run_id}.war
+            - scp -o IdentityFile=~/.ssh/virginia_ec2_key -o LogLevel=error -o BatchMode=yes -o StrictHostKeyChecking=no -o Port=22 $res_builded_file_full_resourcePath/fullcicd.war ubuntu@54.163.31.42:/home/ubuntu/tst/app${run_id}.war
           onSuccess:
             - echo "SUCCESS" 
