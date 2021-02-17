@@ -82,6 +82,8 @@ pipelines:
       - name: ansible_step
         type: Bash
         configuration:
+          inputSteps:
+            - name: ssh_to_ec2
           inputResources:
             - name: docker_repo
             - name: builded_file_full
