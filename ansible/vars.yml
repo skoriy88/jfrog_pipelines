@@ -4,14 +4,13 @@ registry_username: "{{ lookup('env', 'int_docker_repo_int_username') }}"
 registry_password: "{{ lookup('env', 'int_docker_repo_int_password') }}"
 registry_name: skoriy88.jfrog.io/mydockerrepo
 image_name: fullcicd
-# repository_address: https://skoriy88.jfrog.io/artifactory/mymavenrepo
-# repository_user:     deployer
-# repository_password: deployer
+repository_address: "{{ lookup('env', 'int_maven_repo_int_url') }}" #https://skoriy88.jfrog.io/artifactory/mymavenrepo
+repository_user:     maven_user #"{{ lookup('env', 'int_maven_repo_int_username') }}"
+repository_password: 1qaZXsw2 #"{{ lookup('env', 'int_maven_repo_int_password') }}"
 
-# # Artifact Info
-# group_id:            "skoriy88"
-# artifact_id:         "example.smallest"
-# artifact_version:    "{{ build_number }}"
-# artifact_extension:  "jar"
-# artifact_filename:   "${artifact_filename}"
-# artifact_dest:       /opt/test_web_app/deployed_app.war
+# Artifact Info
+group_id:            skoriy88
+artifact_id:         "{{ lookup('env', 'pipeline_name') }}"
+artifact_version:    "1.0.{{ lookup('env', 'run_id') }}"
+artifact_extension:  "war"
+artifact_dest:       /home/ubuntu/tst/ans_app.war
