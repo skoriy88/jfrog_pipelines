@@ -95,14 +95,9 @@ pipelines:
         execution:
           onExecute:
             - ansible --version
-            - ansible-galaxy collection install community.general
-            - sudo ansible-galaxy collection install community.general
             - pwd
             - ls -R $res_builded_file_full_resourcePath
             - ls -R $res_docker_repo_resourcePath
             - printenv int_docker_repo_int_url
-            - printenv int_docker_repo_int_username
-            - printenv int_docker_repo_int_password
-            - printenv int_cred_int_maven_repo_username
-            - printenv int_cred_int_maven_repo_password
+            - printenv int_cred_int_maven_repo_url
             - ansible-playbook $res_docker_repo_resourcePath/ansible/playbook_full.yml -i $res_docker_repo_resourcePath/ansible/hosts -vvv
